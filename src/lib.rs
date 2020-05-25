@@ -2,7 +2,7 @@
 
 ```
 #![feature(try_blocks)]
-use ::yolo_block::yolo;
+use yolo_block::yolo;
 
 let result = yolo! {
     "1".parse::<i32>()?
@@ -14,7 +14,7 @@ assert_eq!(result, 6);
 
 ```should_panic
 # #![feature(try_blocks)]
-# use ::yolo_block::yolo;
+# use yolo_block::yolo;
 
 // Panics with message "YOLO'd an error: ParseIntError { kind: InvalidDigit }"
 let result = yolo! {
@@ -60,15 +60,6 @@ impl<T: Debug> From<T> for YoloError {
 
 /**
 
-```
-#![feature(try_blocks)]
-use ::yolo_block::yolo;
-use ::std::convert::TryFrom;
-
-let foo = yolo! {
-  u32::try_from(5u64)?
-};
-```
 
 **/
 
