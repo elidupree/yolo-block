@@ -3,6 +3,15 @@ name = "yolo-block"
 version = "0.1.0"
 authors = ["Eli Dupree <vcs@elidupree.com>"]
 edition = "2018"
+license = "MIT OR Apache-2.0"
+description = "Like a `try` block, but always unwraps the result"
+repository = "https://github.com/elidupree/yolo-block/"
+readme = "README.md"
+keywords = ["yolo", "error", "try"]
+categories = ["rust-patterns", "no-std"]
 
+[dev-dependencies]
+version-sync = "0.9"
 
-[dependencies]
+[package.metadata.docs.rs]
+targets = []

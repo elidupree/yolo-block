@@ -1,5 +1,6 @@
 #![feature(track_caller)]
 #![no_std]
+#![doc(html_root_url = "https://docs.rs/yolo-block/0.1.0")]
 
 use core::convert::From;
 use core::fmt::Debug;
