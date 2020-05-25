@@ -1,3 +1,4 @@
+#![feature(track_caller)]
 #![no_std]
 
 use core::convert::From;
@@ -19,6 +20,10 @@ use core::fmt::Debug;
 pub enum YoloError {}
 
 impl<T: Debug> From<T> for YoloError {
+    // same rationale for these attributes as for unwrap_failed() from core/result.rs
+    #[inline(never)]
+    #[cold]
+    #[track_caller]
     fn from(t: T) -> YoloError {
         panic!("YOLO'd an error: {:?}", t)
     }
