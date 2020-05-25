@@ -1,3 +1,31 @@
+/*!
+
+```
+#![feature(try_blocks)]
+use ::yolo_block::yolo;
+
+let result = yolo! {
+    "1".parse::<i32>()?
+        + "2".parse::<i32>()?
+        + "3".parse::<i32>()?
+};
+assert_eq!(result, 6);
+```
+
+```should_panic
+# #![feature(try_blocks)]
+# use ::yolo_block::yolo;
+
+// Panics with message "YOLO'd an error: ParseIntError { kind: InvalidDigit }"
+let result = yolo! {
+    "1".parse::<i32>()?
+        + "foo".parse::<i32>()?
+        + "3".parse::<i32>()?
+};
+```
+
+**/
+
 #![feature(track_caller)]
 #![no_std]
 #![doc(html_root_url = "https://docs.rs/yolo-block/0.1.0")]
