@@ -24,7 +24,7 @@ let result = yolo! {
 
 ## Motivation
 
-This crate was primarily written as a joke, but I can imagine a practical use for it. While prototyping, you may want to write code that handles errors using the `?` operator, even if you haven't yet implemented a way to handle the errors. In this case, wrapping the code in a `yolo!` block allows you write code that correctly uses `?`, rather than leaving `unwrap()` calls that you might forget to replace later.
+This crate was primarily written as a joke, but I can imagine a practical use for it. While prototyping, you may want to write code that will ultimately handle errors using the `?` operator, but you may not yet have designed the way to catch the errors. In this case, wrapping the code in a `yolo!` block allows you write code that correctly uses `?`, rather than leaving `unwrap()` calls that you will need to replace later.
 
 ## Design and features
 
