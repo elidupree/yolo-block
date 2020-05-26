@@ -28,13 +28,13 @@ This crate was primarily written as a joke, but I can imagine a practical use fo
 
 ## Design and features
 
-Since the `yolo!` macro uses a `try` block internally, it requires you to enable `#![feature(try_blocks)]` in the crate where you use it. As of this writing (Rust 1.43.1), `try` blocks are an unstable feature, so this crate is only available on nightly.
+The `yolo!` macro uses a `try` block internally. `try` blocks are an unstable feature (as of this writing – Rust 1.43.1), so this crate is only available on nightly, and you must enable `#![feature(try_blocks)]` in the crate where you use it.
 
 `yolo-block` is fully compatible with `#![no_std]` (and `#![no_implicit_prelude]`).
 
 A single `yolo!` block can handle multiple error types. Those error types can be any type that implements Debug. No extra type annotations are needed.
 
-Internally, we use a custom error type that can be converted from anything that implements Debug. In order to handle disparate types without having to construct a `Box<dyn Debug>`, the `From` conversion simply panics immediately, and the custom error type is actually uninhabited.
+Internally, we use a custom error type that can be converted from anything that implements Debug. In order to handle disparate types without having to construct a `Box<dyn Debug>`, the `From` conversion simply panics immediately. The custom error type is actually uninhabited.
 
 ## License
 
