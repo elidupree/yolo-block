@@ -2,20 +2,21 @@
 
 Like a `try` block, but automatically unwraps the result. Effectively, inside a `yolo!` block, the `?` operator functions as `unwrap()`.
 
-Since the `yolo!` macro uses a `try` block internally, it requires you to enable `#![feature(try_blocks)]` in the crate where you use it. As of this writing (Rust 1.43.1), `try` blocks are an unstable feature, so this crate is only available on nightly.
+The `yolo!` macro uses a `try` block internally. `try` blocks are an unstable feature (as of this writing – Rust 1.43.1), so this crate is only available on nightly, and you must enable `#![feature(try_blocks)]` in the crate where you use it.
 
-A `yolo!` block can handle any error type that implements Debug, even ones that don't implement Error.
+A single `yolo!` block can handle multiple error types. Those error types can be any type that implements Debug. No extra type annotations are needed.
 
 # Examples
 
 ```
 #![feature(try_blocks)]
 use yolo_block::yolo;
+use std::convert::TryFrom;
 
 let result = yolo! {
-    "1".parse::<i32>()?
-        + "2".parse::<i32>()?
-        + "3".parse::<i32>()?
+    "1".parse::<usize>()?
+        + usize::try_from(2i32)?
+        + [0,1,2,3].binary_search(&3)?
 };
 assert_eq!(result, 6);
 ```
@@ -25,9 +26,9 @@ assert_eq!(result, 6);
 # use yolo_block::yolo;
 // Panics with the message "YOLO'd an error: ParseIntError { kind: InvalidDigit }"
 let result = yolo! {
-    "1".parse::<i32>()?
-        + "foo".parse::<i32>()?
-        + "3".parse::<i32>()?
+    "1".parse::<usize>()?
+        + "foo".parse::<usize>()?
+        + "3".parse::<usize>()?
 };
 ```
 

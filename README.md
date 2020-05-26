@@ -5,19 +5,20 @@ Rust library providing `yolo!` blocks, which are like `try` blocks, except that 
 ```rust
 #![feature(try_blocks)]
 use yolo_block::yolo;
+use std::convert::TryFrom;
 
 let result = yolo! {
-    "1".parse::<i32>()?
-        + "2".parse::<i32>()?
-        + "3".parse::<i32>()?
+    "1".parse::<usize>()?
+        + usize::try_from(2i32)?
+        + [0,1,2,3].binary_search(&3)?
 };
 assert_eq!(result, 6);
 
 // Panics with the message "YOLO'd an error: ParseIntError { kind: InvalidDigit }"
 let result = yolo! {
-    "1".parse::<i32>()?
-        + "foo".parse::<i32>()?
-        + "3".parse::<i32>()?
+    "1".parse::<usize>()?
+        + "foo".parse::<usize>()?
+        + "3".parse::<usize>()?
 };
 ```
 
@@ -31,9 +32,9 @@ Since the `yolo!` macro uses a `try` block internally, it requires you to enable
 
 `yolo-block` is fully compatible with `#![no_std]` (and `#![no_implicit_prelude]`).
 
-A `yolo!` block can handle any error type that implements Debug, even ones that don't implement Error.
+A single `yolo!` block can handle multiple error types. Those error types can be any type that implements Debug. No extra type annotations are needed.
 
-Internally, to handle disparate types without having to construct a `Box<dyn Debug>`, we use a custom error type that can be converted from anything that implements Debug. The custom type is actually uninhabited, and the `From` conversion immediately panics.
+Internally, we use a custom error type that can be converted from anything that implements Debug. In order to handle disparate types without having to construct a `Box<dyn Debug>`, the `From` conversion simply panics immediately, and the custom error type is actually uninhabited.
 
 ## License
 
