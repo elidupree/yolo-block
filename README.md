@@ -1,6 +1,6 @@
 # yolo-block
 
-Like a `try` block, but automatically unwraps the result. Effectively, inside a `yolo!` block, the `?` operator functions as `unwrap()`.
+Rust library providing `yolo!` blocks, which are like `try` blocks, except that they automatically unwrap the result. Effectively, inside a `yolo!` block, the `?` operator functions as `unwrap()`.
 
 ```rust
 #![feature(try_blocks)]
