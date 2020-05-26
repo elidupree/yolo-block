@@ -27,7 +27,7 @@ This crate was primarily written as a joke, but I can imagine a practical use fo
 
 ## Design and features
 
-Since the `yolo!` macro uses a `try` block internally, it requires you to enable `#![feature(try_blocks)]` in the crate where you use it. As of this writing (Rust 1.43.1), `try` blocks are an unstable feature, so `yolo-block` is only available on nightly.
+Since the `yolo!` macro uses a `try` block internally, it requires you to enable `#![feature(try_blocks)]` in the crate where you use it. As of this writing (Rust 1.43.1), `try` blocks are an unstable feature, so this crate is only available on nightly.
 
 `yolo-block` is fully compatible with `#![no_std]` (and `#![no_implicit_prelude]`).
 

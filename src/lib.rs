@@ -2,7 +2,7 @@
 
 Like a `try` block, but automatically unwraps the result. Effectively, inside a `yolo!` block, the `?` operator functions as `unwrap()`.
 
-Since the `yolo!` macro uses a `try` block internally, it requires you to enable `#![feature(try_blocks)]` in the crate where you use it. As of this writing (Rust 1.43.1), `try` blocks are an unstable feature, so `yolo-block` is only available on nightly.
+Since the `yolo!` macro uses a `try` block internally, it requires you to enable `#![feature(try_blocks)]` in the crate where you use it. As of this writing (Rust 1.43.1), `try` blocks are an unstable feature, so this crate is only available on nightly.
 
 A `yolo!` block can handle any error type that implements Debug, even ones that don't implement Error.
 
