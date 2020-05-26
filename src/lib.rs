@@ -1,5 +1,13 @@
 /*!
 
+Like a `try` block, but automatically unwraps the result. Effectively, inside a `yolo!` block, the `?` operator functions as `unwrap()`.
+
+Since the `yolo!` macro uses a `try` block internally, it requires you to enable `#![feature(try_blocks)]` in the crate where you use it. As of this writing (Rust 1.43.1), `try` blocks are an unstable feature, so `yolo-block` is only available on nightly.
+
+A `yolo!` block can handle any error type that implements Debug, even ones that don't implement Error.
+
+# Examples
+
 ```
 #![feature(try_blocks)]
 use yolo_block::yolo;
@@ -15,8 +23,7 @@ assert_eq!(result, 6);
 ```should_panic
 # #![feature(try_blocks)]
 # use yolo_block::yolo;
-
-// Panics with message "YOLO'd an error: ParseIntError { kind: InvalidDigit }"
+// Panics with the message "YOLO'd an error: ParseIntError { kind: InvalidDigit }"
 let result = yolo! {
     "1".parse::<i32>()?
         + "foo".parse::<i32>()?
@@ -60,6 +67,9 @@ impl<T: Debug> From<T> for YoloError {
 
 /**
 
+The macro to create a `yolo!` block.
+
+See the [crate level docs](../yolo_block/index.html) for details.
 
 **/
 

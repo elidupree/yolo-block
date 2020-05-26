@@ -4,6 +4,7 @@ Like a `try` block, but automatically unwraps the result. Effectively, inside a 
 
 ```rust
 #![feature(try_blocks)]
+use yolo_block::yolo;
 
 let result = yolo! {
     "1".parse::<i32>()?
@@ -12,7 +13,7 @@ let result = yolo! {
 };
 assert_eq!(result, 6);
 
-// Panics with message "YOLO'd an error: ParseIntError { kind: InvalidDigit }"
+// Panics with the message "YOLO'd an error: ParseIntError { kind: InvalidDigit }"
 let result = yolo! {
     "1".parse::<i32>()?
         + "foo".parse::<i32>()?
@@ -30,7 +31,7 @@ Since the `yolo!` macro uses a `try` block internally, it requires you to enable
 
 `yolo-block` is fully compatible with `#![no_std]` (and `#![no_implicit_prelude]`).
 
-A `yolo!` block can handle *any* error type that implements Debug, even ones that don't implement Error.
+A `yolo!` block can handle any error type that implements Debug, even ones that don't implement Error.
 
 Internally, to handle disparate types without having to construct a `Box<dyn Debug>`, we use a custom error type that can be converted from anything that implements Debug. The custom type is actually uninhabited, and the `From` conversion immediately panics.
 
